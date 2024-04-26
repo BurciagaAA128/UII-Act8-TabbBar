@@ -14,7 +14,7 @@ class AppMiTabBar extends StatelessWidget {
       home: const MiPaginaInicial(),
     );
   }
-} //Fin AppMiTabBar
+}
 
 //Stateful
 class MiPaginaInicial extends StatefulWidget {
@@ -22,7 +22,7 @@ class MiPaginaInicial extends StatefulWidget {
 
   @override
   State<MiPaginaInicial> createState() => _MiPaginaInicialState();
-} //MiPaginaInicial
+}
 
 class _MiPaginaInicialState extends State<MiPaginaInicial> {
   @override
@@ -31,6 +31,7 @@ class _MiPaginaInicialState extends State<MiPaginaInicial> {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xffaff0ff),
           title: const Text("Tabbar Pockets"),
           centerTitle: true,
           bottom: const TabBar(
@@ -55,20 +56,56 @@ class _MiPaginaInicialState extends State<MiPaginaInicial> {
           ),
         ),
         body: TabBarView(
-          children: const <Widget>[
+          children: <Widget>[
             _StyledImage(
               imageUrl: "assets/burguir.jpg",
+              borderRadius: 15.0,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+              size: 200,
             ),
             _StyledImage(
               imageUrl:
                   "https://github.com/BurciagaAA128/Img_IOS/blob/main/cocacola.jpg?raw=true",
+              borderRadius: 80,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.blue.withOpacity(1),
+                  blurRadius: 15,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+              size: 250,
             ),
             _StyledImage(
               imageUrl: "assets/gerent.jpg",
+              borderRadius: 200,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.green.withOpacity(1),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+              size: 350,
             ),
             _StyledImage(
               imageUrl:
                   "https://github.com/BurciagaAA128/Img_IOS/blob/main/persona2.jpg?raw=true",
+              borderRadius: 20.0,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.red.withOpacity(1),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+              size: 280,
             ),
           ],
         ),
@@ -79,7 +116,17 @@ class _MiPaginaInicialState extends State<MiPaginaInicial> {
 
 class _StyledImage extends StatelessWidget {
   final String imageUrl;
-  const _StyledImage({required this.imageUrl, Key? key}) : super(key: key);
+  final double borderRadius;
+  final List<BoxShadow> boxShadow;
+  final double size;
+
+  const _StyledImage({
+    required this.imageUrl,
+    required this.borderRadius,
+    required this.boxShadow,
+    required this.size,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -88,21 +135,15 @@ class _StyledImage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: 500,
-            height: 400,
+            width: size,
+            height: size,
             margin: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
-                  blurRadius: 10,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-              borderRadius: BorderRadius.circular(15),
+              boxShadow: boxShadow,
+              borderRadius: BorderRadius.circular(borderRadius),
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(borderRadius),
               child: Image(
                 image: imageUrl.startsWith('http')
                     ? NetworkImage(imageUrl)
